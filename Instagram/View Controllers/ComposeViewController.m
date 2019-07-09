@@ -7,6 +7,7 @@
 //
 
 #import "ComposeViewController.h"
+#import "Post.h"
 
 @interface ComposeViewController ()
 
@@ -62,6 +63,14 @@
 
 // Share button tapped
 - (IBAction)onShareTap:(id)sender {
+    [Post postUserImage:self.imageView.image withCaption:self.captionTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Error posting: %@", error.localizedDescription);
+        } else {
+            NSLog(@"Successfully posted!");
+            [self dismissViewControllerAnimated:YES completion:nil];
+        }
+    }];
 }
 
 

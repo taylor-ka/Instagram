@@ -24,6 +24,7 @@
 }
 
 + (void)postUserImage:(UIImage *)image withCaption:(NSString *)caption withCompletion:(PFBooleanResultBlock)completion {
+    // Create post
     Post *newPost = [Post new];
     newPost.image = [self getPFFileFromImage:image];
     newPost.author = [PFUser currentUser];
@@ -31,12 +32,12 @@
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
     
+    // Post image
     [newPost saveInBackgroundWithBlock: completion];
-
 }
 
+// create file object from image
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
-    
     // check if image is not nil
     if (!image) {
         return nil;
@@ -48,8 +49,8 @@
         return nil;
     }
     
-    // TODO: working on PFFile
-    //return [PFFile fileWithName:@"image.png" data:imageData];
+    // return object with image
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
 @end
