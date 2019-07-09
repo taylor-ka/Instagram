@@ -12,6 +12,7 @@
 #import "LoginViewController.h"
 
 @interface FeedViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
 
 @end
 
@@ -19,7 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome %@!", PFUser.currentUser.username];
 }
 
 - (IBAction)onLogoutTap:(id)sender {
