@@ -167,7 +167,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="insta_camera_btn" id="Ymi-mr-Qvq">
                             <connections>
-                                <action selector="onCameraTap:" destination="tnT-tw-ByT" id="Z81-Or-mRa"/>
+                                <segue destination="RG6-ic-Nn1" kind="presentation" modalTransitionStyle="flipHorizontal" id="eAt-bf-Um7"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -178,6 +178,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8W-ee-RQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2428.985507246377" y="387.72321428571428"/>
+        </scene>
+        <!--Compose View Controller-->
+        <scene sceneID="3bK-tE-fTZ">
+            <objects>
+                <viewController id="8Lz-H3-3u8" customClass="ComposeViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bjq-Qi-VQ8">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="oiQ-xO-urv"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="G03-d9-Ybn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="R3T-0q-ycZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4414" y="388"/>
         </scene>
         <!--Authenticated Navigation Controller-->
         <scene sceneID="fo4-ts-53Q">
@@ -196,6 +212,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C0T-f5-is9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1454" y="388"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="VqL-bg-5Zj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RG6-ic-Nn1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="3iW-Gt-GdI">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8Lz-H3-3u8" kind="relationship" relationship="rootViewController" id="VRU-Lh-5Oy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bK4-7m-Z6T" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3506" y="388"/>
         </scene>
     </scenes>
     <resources>

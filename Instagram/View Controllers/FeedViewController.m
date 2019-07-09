@@ -13,7 +13,6 @@
 
 @interface FeedViewController ()
 
-@property (strong, nonatomic) UIImagePickerController *imagePickerVC;
 @property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
 
 @end
@@ -22,17 +21,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Set up image picker
-    self.imagePickerVC = [UIImagePickerController new];
-    self.imagePickerVC.delegate = self;
-    self.imagePickerVC.allowsEditing = YES;
-    // Check if camera is available
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    } else {
-        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
     
     self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome %@!", PFUser.currentUser.username];
 }
@@ -56,20 +44,6 @@
     
     // Set root view controller to swich views
     appDelegate.window.rootViewController = loginViewController;
-}
-
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    // Get the image captured by the UIImagePickerController
-    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    
-    // TODO: Save image to post
-    
-    // Dismiss UIImagePickerController
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)onCameraTap:(id)sender {
-    [self presentViewController:self.imagePickerVC animated:YES completion:nil];
 }
 
 /*
