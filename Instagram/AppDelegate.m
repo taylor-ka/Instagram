@@ -24,20 +24,15 @@
         configuration.server = @"http://finstainstagram.herokuapp.com/parse";
     }];
     
+    // Initialize Parse
     [Parse initializeWithConfiguration:config];
     
-    // Test if server is connected
-    PFObject *gameScore = [PFObject objectWithClassName:@"GameScore"];
-    gameScore[@"score"] = @1337;
-    gameScore[@"playerName"] = @"Taylor Ka";
-    gameScore[@"cheatMode"] = @NO;
-    [gameScore saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Object saved!");
-        } else {
-            NSLog(@"Error: %@", error.description);
-        }
-    }];
+    // Check for cached user
+    if (PFUser.currentUser) {
+        // Go straight to feed
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticatedNavigationController"];
+    }
     
     return YES;
 }

@@ -7,6 +7,7 @@
 //
 
 #import "FeedTableViewController.h"
+#import "Parse/Parse.h"
 
 @interface FeedTableViewController ()
 
@@ -22,6 +23,15 @@
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+- (IBAction)onLogoutTap:(id)sender {
+    // Log out user
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        
+    }];
+    
+    // Return to login screen
 }
 
 #pragma mark - Table view data source
