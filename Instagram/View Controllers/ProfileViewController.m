@@ -8,7 +8,6 @@
 
 #import "ProfileViewController.h"
 #import "Parse/Parse.h"
-
 @interface ProfileViewController ()
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
@@ -26,7 +25,38 @@
 
 // override
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    NSLog(@"finished picking");
+        // Get the image captured by the UIImagePickerController
+        UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+        
+        self.imageView.image = editedImage;
+        self.tapPromptLabel.hidden = YES;
+        
+        // Dismiss UIImagePickerController
+        [self dismissViewControllerAnimated:NO completion:nil];
+    
+        // Upload user profile
+        PFUser *user = [PFUser currentUser];
+    PFFileObject *picFile = [self getPFFileFromImage:self.imageView.image];
+    [user setObject: picFile forKey:@"profilePic"];
+        [user saveInBackground];
+}
+
+//TODO: reduce redundancy here
+// create file object from image
+- (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
+    // check if image is not nil
+    if (!image) {
+        return nil;
+    }
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    // get image data and check if that is not nil
+    if (!imageData) {
+        return nil;
+    }
+    
+    // return object with image
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
 

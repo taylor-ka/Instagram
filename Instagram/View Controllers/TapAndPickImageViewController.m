@@ -5,7 +5,10 @@
 //  Created by taylorka on 7/10/19.
 //  Copyright © 2019 taylorka. All rights reserved.
 //
-//  This class is abstract and should be subclassed.
+//  This class manages a imageView with a prompt to tap, which will then pull up and image picker.
+
+// This class is abstract and should be subclassed.
+// The subclass should set the prompt text and implement what happens after an image is picked.
 
 #import "TapAndPickImageViewController.h"
 
@@ -54,10 +57,26 @@
     NSLog(@"Presented ComposeVC");
 }
 
+// Subclass must override this method
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
     @throw [NSException exceptionWithName:NSInternalInconsistencyException
                                    reason:@"You must override this method in a subclass"
                                  userInfo:nil];
+}
+
+// Resize image - 10 MB limit to upload
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 /*

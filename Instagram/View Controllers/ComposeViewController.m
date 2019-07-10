@@ -11,65 +11,33 @@
 
 @interface ComposeViewController ()
 
-@property (strong, nonatomic)  UIImagePickerController *imagePickerVC;
-@property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) IBOutlet UILabel *tapPromptLabel;
 
 @end
 
 @implementation ComposeViewController
 
+#pragma mark - Loading
+
 - (void)viewDidLoad {
+    // Super class sets up tap gesture recognizer, image picker
     [super viewDidLoad];
-    
-    [self setUpPhotoWithTapRecognizer];
     
     // Set up text view
     self.captionTextView.layer.borderWidth = 1;
     self.captionTextView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.captionTextView.layer.cornerRadius = 5;
     self.captionTextView.text = nil;
-    
-    [self setUpImagePicker];
 }
 
-- (void)setUpPhotoWithTapRecognizer {
-    // Image and tap prompt
-    self.imageView.backgroundColor = [UIColor lightGrayColor];
-    self.tapPromptLabel.hidden = NO;
-    
-    // Link tap gesture recognizer with image view
-    UITapGestureRecognizer *photoTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onPhotoTap:)];
-    [self.imageView addGestureRecognizer:photoTapGestureRecognizer];
-    [self.imageView setUserInteractionEnabled:YES];
-}
-
-- (void)setUpImagePicker {
-    // Set up image picker
-    self.imagePickerVC = [UIImagePickerController new];
-    self.imagePickerVC.delegate = self;
-    self.imagePickerVC.allowsEditing = YES;
-    
-    // Check if camera is available
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    } else {
-        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-}
-
-- (void)onPhotoTap:(id)sender {
-    [self presentViewController:self.imagePickerVC animated:YES completion:nil];
-    NSLog(@"Presented ComposeVC");
-}
-
-// Tap anywhere on screen
+// Tap anywhere on screen to dismiss keyboard
 - (IBAction)onScreenTap:(id)sender {
     // Dismiss key board
     [self.view endEditing:YES];
 }
+
+#pragma mark - Buttons
 
 // Close button tapped
 - (IBAction)onCloseTap:(id)sender {
@@ -94,6 +62,7 @@
     }];
 }
 
+// @override
 // After user takes photo/ picks image
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
     // Get the image captured by the UIImagePickerController
@@ -104,21 +73,6 @@
     
     // Dismiss UIImagePickerController
     [self dismissViewControllerAnimated:NO completion:nil];
-}
-
-// Resize image - 10 MB limit to upload
-- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
-    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
-    
-    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
-    resizeImageView.image = image;
-    
-    UIGraphicsBeginImageContext(size);
-    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    return newImage;
 }
 
 /*

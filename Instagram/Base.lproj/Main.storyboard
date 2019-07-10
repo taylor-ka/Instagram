@@ -289,8 +289,8 @@
                     <connections>
                         <outlet property="activityIndicator" destination="gTX-9P-Wup" id="90P-ze-lPX"/>
                         <outlet property="captionTextView" destination="bGv-2a-Rzd" id="VAR-3S-aw7"/>
-                        <outlet property="imageView" destination="Yhg-bc-hJu" id="hWw-kq-XVu"/>
-                        <outlet property="tapPromptLabel" destination="KMo-5Y-WW8" id="MFe-iL-U5c"/>
+                        <outlet property="imageView" destination="Yhg-bc-hJu" id="x1b-k8-40w"/>
+                        <outlet property="tapPromptLabel" destination="KMo-5Y-WW8" id="k9l-tm-OFz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3T-0q-ycZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
