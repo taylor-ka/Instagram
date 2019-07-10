@@ -31,7 +31,7 @@
     if (PFUser.currentUser) {
         // Go straight to feed
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticatedNavigationController"];
+        self.window.rootViewController = [storyboard instantiateViewControllerWithIdentifier:@"AuthenticatedController"];
     }
     
     return YES;

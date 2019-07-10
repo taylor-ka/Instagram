@@ -65,7 +65,7 @@
                     <connections>
                         <outlet property="passwordField" destination="Apo-e5-oQV" id="acO-rT-oS3"/>
                         <outlet property="usernameField" destination="CWc-pS-aLu" id="A8d-HU-oKi"/>
-                        <segue destination="6gs-wJ-i8F" kind="presentation" identifier="loginSegue" modalTransitionStyle="flipHorizontal" id="UZg-F7-ZFh"/>
+                        <segue destination="cG2-k7-RC3" kind="presentation" identifier="loginSegue" id="3yI-hK-YkC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -226,7 +226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8W-ee-RQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2428" y="387.192118226601"/>
+            <point key="canvasLocation" x="3338" y="-30"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="3bK-tE-fTZ">
@@ -300,12 +300,13 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3488.8000000000002" y="387.93103448275866"/>
+            <point key="canvasLocation" x="4314" y="-30"/>
         </scene>
         <!--Authenticated Navigation Controller-->
         <scene sceneID="fo4-ts-53Q">
             <objects>
-                <navigationController storyboardIdentifier="AuthenticatedNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="6gs-wJ-i8F" userLabel="Authenticated Navigation Controller" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6gs-wJ-i8F" userLabel="Authenticated Navigation Controller" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Home" image="feed_tab" id="eer-gB-CQT"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kvj-IY-LI0">
                         <rect key="frame" x="0.0" y="44" width="375" height="44"/>
@@ -318,12 +319,85 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C0T-f5-is9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1454" y="388"/>
+            <point key="canvasLocation" x="2431" y="-30"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="3Vt-C7-OHg">
+            <objects>
+                <tabBarController storyboardIdentifier="AuthenticatedController" automaticallyAdjustsScrollViewInsets="NO" id="cG2-k7-RC3" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XTB-ul-row">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="6gs-wJ-i8F" kind="relationship" relationship="viewControllers" id="3he-lG-wX0"/>
+                        <segue destination="8bs-Bx-otS" kind="relationship" relationship="viewControllers" id="f0p-Fj-B3K"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9ZS-fa-ej3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1295" y="472"/>
+        </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="6go-jJ-20o">
+            <objects>
+                <viewController id="6Sc-Gp-VqL" customClass="ProfileViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Klg-pA-k1W">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Cv-rE-XxV">
+                                <rect key="frame" x="16" y="106" width="114" height="114"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUh-7Q-uB4">
+                                <rect key="frame" x="16" y="117" width="114" height="91"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="5hB-6h-hOf"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="MdO-lY-FEx"/>
+                    <connections>
+                        <outlet property="imageView" destination="0Cv-rE-XxV" id="Eh3-td-UIo"/>
+                        <outlet property="navigationItem" destination="MdO-lY-FEx" id="TYw-YR-RfP"/>
+                        <outlet property="tapPromptLabel" destination="KUh-7Q-uB4" id="DV2-f5-7MH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qkU-4e-uW2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3372" y="663.54679802955673"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="THt-gr-xJK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8bs-Bx-otS" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Profile" image="profile_tab" id="QHi-q6-CmK"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="seK-UU-NjA">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6Sc-Gp-VqL" kind="relationship" relationship="rootViewController" id="o1e-VB-8bh"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Go-AQ-euW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2429.5999999999999" y="663.54679802955673"/>
         </scene>
     </scenes>
     <resources>
         <image name="InstagramLabel" width="1200" height="429"/>
+        <image name="feed_tab" width="25" height="25"/>
         <image name="insta_camera_btn" width="25" height="25"/>
         <image name="instagramGradient" width="312" height="390"/>
+        <image name="profile_tab" width="25" height="25"/>
     </resources>
 </document>
