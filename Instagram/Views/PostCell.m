@@ -9,6 +9,7 @@
 #import "PostCell.h"
 #import <Parse/PFCollectionViewCell.h>
 #import <Parse/PFImageView.h>
+#import "NSDate+DateTools.h"
 
 @interface PostCell ()
 
@@ -19,6 +20,7 @@
 // Post
 @property (weak, nonatomic) IBOutlet PFImageView *postPFImageView;
 @property (weak, nonatomic) IBOutlet UILabel *postCaptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeStampLabel;
 
 
 @end
@@ -37,24 +39,17 @@
 }
 
 - (void)setUpPostCell {
-    // Set up header
     self.usernameLabel.text = self.post.author.username;
+    self.postCaptionLabel.text = self.post.caption;
+    self.timeStampLabel.text = self.post.createdAt.timeAgoSinceNow;
     
-    // Reduce flicker
+    // Reduce flicker of images
     self.profilePFImageView.image = nil;
-    self.postPFImageView.image = nil;
-    
-    // Make profile picture circular
-    self.profilePFImageView.layer.cornerRadius = self.profilePFImageView.frame.size.width / 2;
-    self.profilePFImageView.clipsToBounds = true;
     self.profilePFImageView.alpha = 0.0;
+    self.postPFImageView.image = nil;
+    self.postPFImageView.alpha = 0.0;
     
-    // Set up profile picture
-    PFFileObject *profilePicFile = self.post.author[@"profilePic"];
-    if (profilePicFile) { // User has profile picture
-        self.profilePFImageView.file = profilePicFile;
-        [self.profilePFImageView loadInBackground];
-    }
+    [self setUpProfilePicture];
     
     // Set up post image
     self.postPFImageView.file = self.post.image;
@@ -66,9 +61,16 @@
         self.postPFImageView.alpha = 1.0;
         self.profilePFImageView.alpha = 1.0;
     }];
+}
+
+- (void) setUpProfilePicture {
+    // Make profile picture circular
+    self.profilePFImageView.layer.cornerRadius = self.profilePFImageView.frame.size.width / 2;
+    self.profilePFImageView.clipsToBounds = true;
     
-    // Set up caption
-    self.postCaptionLabel.text = self.post.caption;
+    // Set up profile picture
+    self.profilePFImageView.file = self.post.author[@"profilePic"];
+    [self.profilePFImageView loadInBackground];
 }
 
 @end

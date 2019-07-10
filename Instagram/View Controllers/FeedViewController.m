@@ -12,6 +12,7 @@
 #import "FeedViewController.h"
 #import "LoginViewController.h"
 #import "ComposeViewController.h"
+#import "DetailsViewController.h"
 
 #import "Post.h"
 #import "PostCell.h"
@@ -103,6 +104,11 @@
     return self.posts.count;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // Row will only be selected when user clicks
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma mark - Feed View Delegate
 
 - (void)didComposePost:(nonnull Post *)post {
@@ -119,6 +125,12 @@
         NSLog(@"compose segue prep");
         ComposeViewController *composeVC = [segue destinationViewController];
         composeVC.delegate = self;
+    } else {
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        
+        DetailsViewController *detailsVC = [segue destinationViewController];
+        detailsVC.post = self.posts[indexPath.row];
     }
 }
 
