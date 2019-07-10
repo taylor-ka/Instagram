@@ -24,7 +24,7 @@
 		B69835E722D528350095E86E /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = B69835E622D528350095E86E /* Post.m */; };
 		B69835EB22D54B1F0095E86E /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B69835EA22D54B1F0095E86E /* PostCell.m */; };
 		B69835EE22D66E450095E86E /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B69835ED22D66E450095E86E /* ProfileViewController.m */; };
-		B69835F122D6736F0095E86E /* TapAndPickImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B69835F022D6736F0095E86E /* TapAndPickImageViewController.m */; };
+		B69835F722D690E00095E86E /* CurrentUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B69835F622D690E00095E86E /* CurrentUserProfileViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,8 +79,8 @@
 		B69835EA22D54B1F0095E86E /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		B69835EC22D66E450095E86E /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		B69835ED22D66E450095E86E /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		B69835EF22D6736F0095E86E /* TapAndPickImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TapAndPickImageViewController.h; sourceTree = "<group>"; };
-		B69835F022D6736F0095E86E /* TapAndPickImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TapAndPickImageViewController.m; sourceTree = "<group>"; };
+		B69835F522D690E00095E86E /* CurrentUserProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CurrentUserProfileViewController.h; sourceTree = "<group>"; };
+		B69835F622D690E00095E86E /* CurrentUserProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CurrentUserProfileViewController.m; sourceTree = "<group>"; };
 		BFCDA1907F1BB52CF7C00E20 /* Pods_InstagramUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE92474175538546AD37E3EE /* Pods-InstagramUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramUITests.release.xcconfig"; path = "Target Support Files/Pods-InstagramUITests/Pods-InstagramUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F07B797FE9B5D338FD4AA09D /* Pods-InstagramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramTests.debug.xcconfig"; path = "Target Support Files/Pods-InstagramTests/Pods-InstagramTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -192,10 +192,10 @@
 				B69835DE22D415370095E86E /* FeedViewController.m */,
 				B69835E022D4206E0095E86E /* ComposeViewController.h */,
 				B69835E122D4206E0095E86E /* ComposeViewController.m */,
-				B69835EF22D6736F0095E86E /* TapAndPickImageViewController.h */,
-				B69835F022D6736F0095E86E /* TapAndPickImageViewController.m */,
 				B69835EC22D66E450095E86E /* ProfileViewController.h */,
 				B69835ED22D66E450095E86E /* ProfileViewController.m */,
+				B69835F522D690E00095E86E /* CurrentUserProfileViewController.h */,
+				B69835F622D690E00095E86E /* CurrentUserProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -453,12 +453,12 @@
 			files = (
 				B69835D922D4061C0095E86E /* CreateAccountViewController.m in Sources */,
 				B69835EE22D66E450095E86E /* ProfileViewController.m in Sources */,
+				B69835F722D690E00095E86E /* CurrentUserProfileViewController.m in Sources */,
 				B69835DF22D415370095E86E /* FeedViewController.m in Sources */,
 				B69835B122D3FB450095E86E /* main.m in Sources */,
 				B69835EB22D54B1F0095E86E /* PostCell.m in Sources */,
 				B69835E222D4206E0095E86E /* ComposeViewController.m in Sources */,
 				B69835A322D3FB440095E86E /* AppDelegate.m in Sources */,
-				B69835F122D6736F0095E86E /* TapAndPickImageViewController.m in Sources */,
 				B69835D622D404870095E86E /* LoginViewController.m in Sources */,
 				B69835E722D528350095E86E /* Post.m in Sources */,
 			);

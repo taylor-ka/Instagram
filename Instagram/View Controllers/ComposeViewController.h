@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Post.h"
-#import "TapAndPickImageViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface ComposeViewController : TapAndPickImageViewController
+@interface ComposeViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) id<PostComposedDelegate> delegate;
 

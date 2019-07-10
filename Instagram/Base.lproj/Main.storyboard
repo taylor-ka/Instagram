@@ -289,8 +289,8 @@
                     <connections>
                         <outlet property="activityIndicator" destination="gTX-9P-Wup" id="90P-ze-lPX"/>
                         <outlet property="captionTextView" destination="bGv-2a-Rzd" id="VAR-3S-aw7"/>
-                        <outlet property="imageView" destination="Yhg-bc-hJu" id="x1b-k8-40w"/>
-                        <outlet property="tapPromptLabel" destination="KMo-5Y-WW8" id="k9l-tm-OFz"/>
+                        <outlet property="imageView" destination="Yhg-bc-hJu" id="iKD-eG-Svv"/>
+                        <outlet property="tapPromptLabel" destination="KMo-5Y-WW8" id="9FL-Az-o78"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="R3T-0q-ycZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -339,34 +339,32 @@
             </objects>
             <point key="canvasLocation" x="1295" y="472"/>
         </scene>
-        <!--Profile View Controller-->
+        <!--Current User Profile View Controller-->
         <scene sceneID="6go-jJ-20o">
             <objects>
-                <viewController id="6Sc-Gp-VqL" customClass="ProfileViewController" sceneMemberID="viewController">
+                <viewController id="6Sc-Gp-VqL" customClass="CurrentUserProfileViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Klg-pA-k1W">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Cv-rE-XxV">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="0Cv-rE-XxV" customClass="PFImageView">
                                 <rect key="frame" x="16" y="106" width="114" height="114"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KUh-7Q-uB4">
-                                <rect key="frame" x="16" y="117" width="114" height="91"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Agl-Bm-ErQ">
+                                <rect key="frame" x="124" y="228" width="127" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <state key="normal" title="Edit Profile Picture"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="5hB-6h-hOf"/>
                     </view>
                     <navigationItem key="navigationItem" id="MdO-lY-FEx"/>
                     <connections>
-                        <outlet property="imageView" destination="0Cv-rE-XxV" id="Eh3-td-UIo"/>
+                        <outlet property="editProfilePicButton" destination="Agl-Bm-ErQ" id="RLh-Nd-y9M"/>
                         <outlet property="navigationItem" destination="MdO-lY-FEx" id="TYw-YR-RfP"/>
-                        <outlet property="tapPromptLabel" destination="KUh-7Q-uB4" id="DV2-f5-7MH"/>
+                        <outlet property="profilePFImageView" destination="0Cv-rE-XxV" id="eMU-sK-Xf2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qkU-4e-uW2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -395,6 +393,7 @@
     </scenes>
     <resources>
         <image name="InstagramLabel" width="1200" height="429"/>
+        <image name="defaultProfilePic" width="240" height="240"/>
         <image name="feed_tab" width="25" height="25"/>
         <image name="insta_camera_btn" width="25" height="25"/>
         <image name="instagramGradient" width="312" height="390"/>

@@ -10,7 +10,10 @@
 #import "Post.h"
 
 @interface ComposeViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *imageView;
+@property (weak, nonatomic) IBOutlet UILabel *tapPromptLabel;
 
+@property (strong, nonatomic)  UIImagePickerController *imagePickerVC;
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
@@ -18,7 +21,7 @@
 
 @implementation ComposeViewController
 
-#pragma mark - Loading
+#pragma mark - Loading and Set Up
 
 - (void)viewDidLoad {
     // Super class sets up tap gesture recognizer, image picker
@@ -29,15 +32,65 @@
     self.captionTextView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.captionTextView.layer.cornerRadius = 5;
     self.captionTextView.text = nil;
+    
+    [self setUpPhotoWithTapRecognizer];
+    [self setUpImagePicker];
 }
+
+#pragma mark - Photo Tap
+
+- (void)setUpPhotoWithTapRecognizer {
+    // Image and tap prompt
+    self.imageView.backgroundColor = [UIColor lightGrayColor];
+    self.tapPromptLabel.hidden = NO;
+    
+    // Link tap gesture recognizer with image view
+    UITapGestureRecognizer *photoTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onPhotoTap:)];
+    [self.imageView addGestureRecognizer:photoTapGestureRecognizer];
+    [self.imageView setUserInteractionEnabled:YES];
+    
+}
+
+- (void)onPhotoTap:(id)sender {
+    [self presentViewController:self.imagePickerVC animated:YES completion:nil];
+    NSLog(@"Presented ComposeVC");
+}
+
+#pragma mark - Image Picker controller
+
+- (void)setUpImagePicker {
+    // Set up image picker
+    self.imagePickerVC = [UIImagePickerController new];
+    self.imagePickerVC.delegate = self;
+    self.imagePickerVC.allowsEditing = YES;
+    
+    // Check if camera is available
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else {
+        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+}
+
+// After user takes photo/ picks image
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    // Get the image captured by the UIImagePickerController
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    
+    self.imageView.image = editedImage;
+    self.tapPromptLabel.hidden = YES;
+    
+    // Dismiss UIImagePickerController
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+#pragma mark - User actions
 
 // Tap anywhere on screen to dismiss keyboard
 - (IBAction)onScreenTap:(id)sender {
     // Dismiss key board
     [self.view endEditing:YES];
 }
-
-#pragma mark - Buttons
 
 // Close button tapped
 - (IBAction)onCloseTap:(id)sender {
@@ -60,19 +113,6 @@
         }
         [self.activityIndicator stopAnimating];
     }];
-}
-
-// @override
-// After user takes photo/ picks image
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    // Get the image captured by the UIImagePickerController
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-
-    self.imageView.image = editedImage;
-    self.tapPromptLabel.hidden = YES;
-    
-    // Dismiss UIImagePickerController
-    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 /*

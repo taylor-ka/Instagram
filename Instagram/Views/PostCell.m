@@ -41,7 +41,7 @@
     self.usernameLabel.text = self.post.author.username;
     
     // Set up image with fade in
-    self.postPFImageView.file = self.post[@"image"];
+    self.postPFImageView.file = self.post.image;
     self.postPFImageView.alpha = 0.0;
     [self.postPFImageView loadInBackground];
     [UIView animateWithDuration:0.5 animations:^{
@@ -49,7 +49,7 @@
     }];
     
     // Set up caption
-    self.postCaptionLabel.text = self.post[@"caption"];
+    self.postCaptionLabel.text = self.post.caption;
 }
 
 @end

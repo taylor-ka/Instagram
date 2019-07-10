@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TapAndPickImageViewController.h"
+#import "Parse/Parse.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProfileViewController : TapAndPickImageViewController
+@interface ProfileViewController : UIViewController
+
+@property (strong, nonatomic) PFUser *user;
 
 @end
 
