@@ -36,6 +36,10 @@
     newUser.password = self.passwordField.text;
     newUser.email = self.emailField.text;
     
+    // Set default user profile picture
+    PFFileObject *picFile = [CreateAccountViewController getPFFileFromImage: [UIImage imageNamed:@"defaultProfilePic"]];
+    [newUser setObject: picFile forKey:@"profilePic"];
+    
     // Call sign up function
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if (error != nil) {
@@ -50,9 +54,32 @@
     }];
 }
 
+//TODO: reduce redundancy here
+// create file object from image
++ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
+    // check if image is not nil
+    if (!image) {
+        return nil;
+    }
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    // get image data and check if that is not nil
+    if (!imageData) {
+        return nil;
+    }
+    
+    // return object with image
+    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
+}
+                             
+                             
+
 - (IBAction)onCloseTap:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+                             
+
 
 /*
 #pragma mark - Navigation

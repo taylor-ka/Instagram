@@ -40,12 +40,31 @@
     // Set up header
     self.usernameLabel.text = self.post.author.username;
     
-    // Set up image with fade in
+    // Reduce flicker
+    self.profilePFImageView.image = nil;
+    self.postPFImageView.image = nil;
+    
+    // Make profile picture circular
+    self.profilePFImageView.layer.cornerRadius = self.profilePFImageView.frame.size.width / 2;
+    self.profilePFImageView.clipsToBounds = true;
+    self.profilePFImageView.alpha = 0.0;
+    
+    // Set up profile picture
+    PFFileObject *profilePicFile = self.post.author[@"profilePic"];
+    if (profilePicFile) { // User has profile picture
+        self.profilePFImageView.file = profilePicFile;
+        [self.profilePFImageView loadInBackground];
+    }
+    
+    // Set up post image
     self.postPFImageView.file = self.post.image;
     self.postPFImageView.alpha = 0.0;
     [self.postPFImageView loadInBackground];
+    
+    // Fade in profile pic and post
     [UIView animateWithDuration:0.5 animations:^{
         self.postPFImageView.alpha = 1.0;
+        self.profilePFImageView.alpha = 1.0;
     }];
     
     // Set up caption

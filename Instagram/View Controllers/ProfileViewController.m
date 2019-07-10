@@ -12,7 +12,6 @@
 @interface ProfileViewController ()
 
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
-@property (weak, nonatomic) IBOutlet PFImageView *profilePFImageView;
 
 @end
 
@@ -20,8 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Reduce flicker
+    self.profilePFImageView.image = nil;
     
     self.navigationItem.title = self.user.username;
+    
+    // Make profile picture circular
+    self.profilePFImageView.layer.cornerRadius = self.profilePFImageView.frame.size.width / 2;
+    self.profilePFImageView.clipsToBounds = true;
     
     // Set up profile picture
     PFFileObject *profilePicFile = self.user[@"profilePic"];

@@ -11,6 +11,7 @@
 @interface CurrentUserProfileViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *editProfilePicButton;
+@property (strong, nonatomic) UIImagePickerController *imagePickerVC;
 
 @end
 
@@ -19,9 +20,49 @@
 - (void)viewDidLoad {
     self.user = [PFUser currentUser];
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    [self setUpImagePicker];
 }
 
+#pragma mark - Image Picker
+
+- (void)setUpImagePicker {
+    // Set up image picker
+    self.imagePickerVC = [UIImagePickerController new];
+    self.imagePickerVC.delegate = self;
+    self.imagePickerVC.allowsEditing = YES;
+    
+    // Check if camera is available
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else {
+        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+}
+
+- (IBAction)onEditProfilePicTap:(id)sender {
+    [self presentViewController:self.imagePickerVC animated:YES completion:nil];
+}
+
+// After user takes photo/ picks profileimage
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
+    // Get the image captured by the UIImagePickerController
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+    
+    // Update chosen profile picture
+    self.profilePFImageView.image = editedImage;
+    [self updateUserProfilePicture:editedImage];
+    
+    // Dismiss UIImagePickerController
+    [self dismissViewControllerAnimated:NO completion:nil];
+}
+
+#pragma mark - Update user settings
+
+- (void)updateUserProfilePicture:(UIImage*)image {
+    PFFileObject *picFile = [CurrentUserProfileViewController getPFFileFromImage:image];
+    [self.user setObject: picFile forKey:@"profilePic"];
+    [self.user saveInBackground];
+}
 
 //TODO: reduce redundancy here
 // create file object from image
@@ -39,14 +80,6 @@
     
     // return object with image
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
-}
-
-- (void)updateUserProfilePicture:(UIImage*)image {
-    
-    PFFileObject *picFile = [CurrentUserProfileViewController getPFFileFromImage:image];
-    [self.user setObject: picFile forKey:@"profilePic"];
-    [self.user saveInBackground];
-    
 }
 
 /*
