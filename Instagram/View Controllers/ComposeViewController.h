@@ -7,10 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol PostComposedDelegate
+
+// TODO: figure out how to pass back new post so don't to have make api call
+//- (void) didComposePost:(Post*)post;
+- (void) fetchPosts;
+
+@end
+
 @interface ComposeViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (weak, nonatomic) id<PostComposedDelegate> delegate;
 
 @end
 

@@ -196,7 +196,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="insta_camera_btn" id="Ymi-mr-Qvq">
                             <connections>
-                                <segue destination="8Lz-H3-3u8" kind="presentation" id="oyq-1a-D8B"/>
+                                <segue destination="8Lz-H3-3u8" kind="presentation" identifier="composeSegue" id="oyq-1a-D8B"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -243,6 +243,11 @@
                                     <action selector="onShareTap:" destination="8Lz-H3-3u8" eventType="touchUpInside" id="U4X-cB-P8g"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="gTX-9P-Wup">
+                                <rect key="frame" x="170" y="384" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="color" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -253,6 +258,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="G03-d9-Ybn"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="gTX-9P-Wup" id="90P-ze-lPX"/>
                         <outlet property="captionTextView" destination="bGv-2a-Rzd" id="VAR-3S-aw7"/>
                         <outlet property="imageView" destination="Yhg-bc-hJu" id="hWw-kq-XVu"/>
                     </connections>

@@ -13,6 +13,7 @@
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -63,13 +64,19 @@
 
 // Share button tapped
 - (IBAction)onShareTap:(id)sender {
+    // Loading indicator
+    [self.activityIndicator startAnimating];
+    
     [Post postUserImage:self.imageView.image withCaption:self.captionTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error posting: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully posted!");
+            [self.delegate fetchPosts];
+            [self.view endEditing:YES];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
+        [self.activityIndicator stopAnimating];
     }];
 }
 

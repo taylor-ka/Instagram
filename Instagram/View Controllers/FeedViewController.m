@@ -8,15 +8,18 @@
 
 #import "AppDelegate.h"
 #import "Parse/Parse.h"
+
 #import "FeedViewController.h"
 #import "LoginViewController.h"
+#import "ComposeViewController.h"
+
 #import "Post.h"
 #import "PostCell.h"
 
-@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, PostComposedDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSArray *posts;
+@property (strong, nonatomic) NSMutableArray *posts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 
 @end
@@ -49,7 +52,7 @@
     // Fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable postsArray, NSError * _Nullable error) {
         if (postsArray) {
-            self.posts = postsArray;
+            self.posts = [NSMutableArray arrayWithArray:postsArray];
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
             NSLog(@"Posts fetched");
@@ -95,15 +98,28 @@
     return self.posts.count;
 }
 
-/*
+#pragma mark - Feed View Delegate
+
+- (void)didComposePost:(nonnull Post *)post {
+    [self.posts insertObject:post atIndex:0];
+    [self.tableView reloadData];
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"composeSegue"]){
+        NSLog(@"compose segue prep");
+        ComposeViewController *composeVC = [segue destinationViewController];
+        composeVC.delegate = self;
+    }
 }
-*/
+
+
+
+
 
 
 @end
