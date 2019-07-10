@@ -12,8 +12,14 @@
 
 @interface PostCell ()
 
+// Header
+@property (weak, nonatomic) IBOutlet PFImageView *profilePFImageView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+
+// Post
 @property (weak, nonatomic) IBOutlet PFImageView *postPFImageView;
 @property (weak, nonatomic) IBOutlet UILabel *postCaptionLabel;
+
 
 @end
 
@@ -31,6 +37,9 @@
 }
 
 - (void)setUpPostCell {
+    // Set up header
+    self.usernameLabel.text = self.post.author.username;
+    
     // Set up image with fade in
     self.postPFImageView.file = self.post[@"image"];
     self.postPFImageView.alpha = 0.0;
