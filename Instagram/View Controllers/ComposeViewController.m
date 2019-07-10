@@ -73,7 +73,6 @@
     }];
 }
 
-
 // After user takes photo/ picks image
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
     // Get the image captured by the UIImagePickerController

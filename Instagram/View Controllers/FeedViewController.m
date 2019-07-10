@@ -10,20 +10,49 @@
 #import "Parse/Parse.h"
 #import "FeedViewController.h"
 #import "LoginViewController.h"
+#import "Post.h"
+#import "PostCell.h"
 
-@interface FeedViewController ()
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (weak, nonatomic) IBOutlet UILabel *welcomeLabel;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *posts;
 
 @end
 
 @implementation FeedViewController
 
+#pragma mark - Loading
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.welcomeLabel.text = [NSString stringWithFormat:@"Welcome %@!", PFUser.currentUser.username];
+    // Set up table view
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self fetchPosts];
 }
+
+- (void)fetchPosts {
+    // Create query for 20 most recent tweets
+    PFQuery *postQuery = [Post query];
+    [postQuery orderByDescending:@"createdAt"];
+    [postQuery includeKey:@"author"];
+    postQuery.limit = 20;
+    
+    // Fetch data asynchronously
+    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable postsArray, NSError * _Nullable error) {
+        if (postsArray) {
+            self.posts = postsArray;
+            [self.tableView reloadData];
+            NSLog(@"Posts fetched");
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+#pragma mark - Buttons
 
 - (IBAction)onLogoutTap:(id)sender {
     // Log out user
@@ -46,6 +75,19 @@
     appDelegate.window.rootViewController = loginViewController;
 }
 
+#pragma mark - Table View
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    cell.post = self.posts[indexPath.row];
+    [cell setUpPostCell];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.posts.count;
+}
+
 /*
 #pragma mark - Navigation
 
@@ -55,5 +97,6 @@
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end
