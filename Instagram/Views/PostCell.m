@@ -31,9 +31,13 @@
 }
 
 - (void)setUpPostCell {
-    // Set up image
+    // Set up image with fade in
     self.postPFImageView.file = self.post[@"image"];
+    self.postPFImageView.alpha = 0.0;
     [self.postPFImageView loadInBackground];
+    [UIView animateWithDuration:0.9 animations:^{
+        self.postPFImageView.alpha = 1.0;
+    }];
     
     // Set up caption
     self.postCaptionLabel.text = self.post[@"caption"];

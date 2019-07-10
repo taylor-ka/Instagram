@@ -21,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *posts;
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -30,6 +31,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Set up activity indicator
+    [self.activityIndicator startAnimating];
     
     // Set up table view
     self.tableView.delegate = self;
@@ -54,11 +58,12 @@
         if (postsArray) {
             self.posts = [NSMutableArray arrayWithArray:postsArray];
             [self.tableView reloadData];
-            [self.refreshControl endRefreshing];
             NSLog(@"Posts fetched");
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
+        [self.refreshControl endRefreshing];
+        [self.activityIndicator stopAnimating];
     }];
 }
 
