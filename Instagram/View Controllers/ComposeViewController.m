@@ -11,9 +11,11 @@
 
 @interface ComposeViewController ()
 
+@property (strong, nonatomic)  UIImagePickerController *imagePickerVC;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *tapPromptLabel;
 
 @end
 
@@ -21,34 +23,46 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Image
-    self.imageView.image = nil;
     
-    // Text view
+    [self setUpPhotoWithTapRecognizer];
+    
+    // Set up text view
     self.captionTextView.layer.borderWidth = 1;
     self.captionTextView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.captionTextView.layer.cornerRadius = 5;
     self.captionTextView.text = nil;
+    
+    [self setUpImagePicker];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    // If image hasn't been picked yet
-    if (!self.imageView.image) {
-        // Set up image picker
-        UIImagePickerController *imagePickerVC = [UIImagePickerController new];
-        imagePickerVC.delegate = self;
-        imagePickerVC.allowsEditing = YES;
-        
-        // Check if camera is available
-        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-            imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-        } else {
-            imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        }
-        
-        [self presentViewController:imagePickerVC animated:YES completion:nil];
-        NSLog(@"Presented ComposeVC");
+- (void)setUpPhotoWithTapRecognizer {
+    // Image and tap prompt
+    self.imageView.backgroundColor = [UIColor lightGrayColor];
+    self.tapPromptLabel.hidden = NO;
+    
+    // Link tap gesture recognizer with image view
+    UITapGestureRecognizer *photoTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onPhotoTap:)];
+    [self.imageView addGestureRecognizer:photoTapGestureRecognizer];
+    [self.imageView setUserInteractionEnabled:YES];
+}
+
+- (void)setUpImagePicker {
+    // Set up image picker
+    self.imagePickerVC = [UIImagePickerController new];
+    self.imagePickerVC.delegate = self;
+    self.imagePickerVC.allowsEditing = YES;
+    
+    // Check if camera is available
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    } else {
+        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     }
+}
+
+- (void)onPhotoTap:(id)sender {
+    [self presentViewController:self.imagePickerVC animated:YES completion:nil];
+    NSLog(@"Presented ComposeVC");
 }
 
 // Tap anywhere on screen
@@ -84,9 +98,9 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
     // Get the image captured by the UIImagePickerController
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    
-    // TODO: Save image to post
+
     self.imageView.image = editedImage;
+    self.tapPromptLabel.hidden = YES;
     
     // Dismiss UIImagePickerController
     [self dismissViewControllerAnimated:NO completion:nil];

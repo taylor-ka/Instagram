@@ -35,7 +35,7 @@
     self.postPFImageView.file = self.post[@"image"];
     self.postPFImageView.alpha = 0.0;
     [self.postPFImageView loadInBackground];
-    [UIView animateWithDuration:0.9 animations:^{
+    [UIView animateWithDuration:0.5 animations:^{
         self.postPFImageView.alpha = 1.0;
     }];
     
