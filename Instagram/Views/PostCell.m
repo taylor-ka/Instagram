@@ -31,11 +31,12 @@
 }
 
 - (void)setUpPostCell {
+    // Set up image
     self.postPFImageView.file = self.post[@"image"];
     [self.postPFImageView loadInBackground];
     
+    // Set up caption
     self.postCaptionLabel.text = self.post[@"caption"];
-    NSLog(@"%@", self.postCaptionLabel.text);
 }
 
 @end
