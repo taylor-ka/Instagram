@@ -27,7 +27,10 @@
 #pragma mark - Displaying view
 
 - (void)viewDidLoad {
+
     [super viewDidLoad];
+    
+    
     // Reduce flicker
     self.profilePFImageView.image = nil;
     

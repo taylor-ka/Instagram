@@ -162,11 +162,11 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="507" id="oUZ-uL-bKf" customClass="PostCell">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="PostCell" rowHeight="507" id="oUZ-uL-bKf" customClass="PostCell">
                                         <rect key="frame" x="0.0" y="28" width="375" height="507"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oUZ-uL-bKf" id="PET-I7-ZUo">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="506.66666666666669"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="506.66666666666669"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yuj-aI-pml">
@@ -206,7 +206,7 @@
                                             <outlet property="profilePFImageView" destination="tPl-HA-7qW" id="Te2-dG-djr"/>
                                             <outlet property="timeStampLabel" destination="62M-h2-X6C" id="BK5-6L-tm7"/>
                                             <outlet property="usernameLabel" destination="8jf-2e-6SV" id="W6c-pQ-NSO"/>
-                                            <segue destination="29O-XT-4nR" kind="show" id="bWi-EG-ooE"/>
+                                            <segue destination="TB9-ax-nKg" kind="presentation" id="14Z-3r-aTu"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -348,6 +348,7 @@
                                         </view>
                                         <connections>
                                             <outlet property="postPFImageView" destination="O65-kV-1FW" id="m4F-Ri-qH5"/>
+                                            <segue destination="29O-XT-4nR" kind="show" id="0qD-fi-wvW"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -370,6 +371,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="d6Z-HT-pRH"/>
                     </view>
+                    <navigationItem key="navigationItem" id="6tj-40-HJr"/>
                     <connections>
                         <outlet property="collectionView" destination="F8I-AB-ycl" id="Jml-Mq-TV9"/>
                         <outlet property="numPostsLabel" destination="vxD-vK-s44" id="LA2-fW-D2Z"/>
@@ -378,7 +380,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fRL-Wa-4Bd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4348" y="-30"/>
+            <point key="canvasLocation" x="5290.3999999999996" y="-30.295566502463057"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="RAS-Qp-wgQ">
@@ -388,10 +390,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.80000000000000004" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="instagramGradient" translatesAutoresizingMaskIntoConstraints="NO" id="OTD-3h-rCA">
-                                <rect key="frame" x="0.0" y="-3" width="375" height="815"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ozj-qr-cMQ" customClass="PFImageView">
                                 <rect key="frame" x="12" y="97" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -435,7 +433,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lFE-17-rvx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4433" y="664"/>
+            <point key="canvasLocation" x="6642.3999999999996" y="470.68965517241384"/>
         </scene>
         <!--Authenticated Navigation Controller-->
         <scene sceneID="fo4-ts-53Q">
@@ -580,6 +578,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Go-AQ-euW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2429.5999999999999" y="663.54679802955673"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="w2B-sM-jE5">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TB9-ax-nKg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="e7S-kY-Fhg">
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="M1X-nr-WeG" kind="relationship" relationship="rootViewController" id="6kh-uC-gdS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qs9-9J-wJt" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4348" y="-30.295566502463057"/>
         </scene>
     </scenes>
     <resources>

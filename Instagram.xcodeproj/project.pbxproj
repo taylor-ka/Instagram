@@ -196,14 +196,14 @@
 				B69835D822D4061C0095E86E /* CreateAccountViewController.m */,
 				B69835DD22D415370095E86E /* FeedViewController.h */,
 				B69835DE22D415370095E86E /* FeedViewController.m */,
+				B69835FB22D6A9DE0095E86E /* DetailsViewController.h */,
+				B69835FC22D6A9DE0095E86E /* DetailsViewController.m */,
 				B69835E022D4206E0095E86E /* ComposeViewController.h */,
 				B69835E122D4206E0095E86E /* ComposeViewController.m */,
 				B69835EC22D66E450095E86E /* ProfileViewController.h */,
 				B69835ED22D66E450095E86E /* ProfileViewController.m */,
 				B69835F522D690E00095E86E /* CurrentUserProfileViewController.h */,
 				B69835F622D690E00095E86E /* CurrentUserProfileViewController.m */,
-				B69835FB22D6A9DE0095E86E /* DetailsViewController.h */,
-				B69835FC22D6A9DE0095E86E /* DetailsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";

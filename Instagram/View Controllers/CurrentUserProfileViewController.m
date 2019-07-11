@@ -8,7 +8,7 @@
 
 #import "CurrentUserProfileViewController.h"
 
-@interface CurrentUserProfileViewController ()
+@interface CurrentUserProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *editProfilePicButton;
 @property (strong, nonatomic) UIImagePickerController *imagePickerVC;
@@ -24,7 +24,7 @@
 }
 
 #pragma mark - Image Picker
-
+//TODO: REDUCE REDUNDANCY
 - (void)setUpImagePicker {
     // Set up image picker
     self.imagePickerVC = [UIImagePickerController new];
@@ -40,10 +40,55 @@
 }
 
 - (IBAction)onEditProfilePicTap:(id)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        // Both image source types are available
+        [self pickImageWithSourceSelection];
+    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
+        // Only camera is available
+        [self pickImageWithCamera];
+    } else {
+        // Only photo library is available
+        [self pickImageWithPhotoLibrary];
+    }
+    
+}
+
+- (void) pickImageWithCamera {
+    self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
     [self presentViewController:self.imagePickerVC animated:YES completion:nil];
 }
 
-// After user takes photo/ picks profileimage
+- (void) pickImageWithPhotoLibrary {
+    self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    [self presentViewController:self.imagePickerVC animated:YES completion:nil];
+}
+
+- (void) pickImageWithSourceSelection {
+    // Create alert controller with actions
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle: nil
+                                                                              message: nil
+                                                                       preferredStyle: UIAlertControllerStyleActionSheet];
+    // Take photo
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Take Photo" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self pickImageWithCamera];
+    }]];
+    
+    // Choose existing photo
+    [alertController addAction: [UIAlertAction actionWithTitle: @"Choose Existing Photo" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self pickImageWithPhotoLibrary];
+    }]];
+    
+    // Cancel
+    [alertController addAction: [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    // Present as modal popover
+    alertController.modalPresentationStyle = UIModalPresentationPopover;
+    [self presentViewController: alertController animated: YES completion: nil];
+}
+
+// After user takes photo/ picks profile image
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
     // Get the image captured by the UIImagePickerController
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
