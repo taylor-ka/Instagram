@@ -11,9 +11,10 @@
 #import "Post.h"
 #import "PostCollectionViewCell.h"
 
-@interface ProfileViewController () <UICollectionViewDataSource, UICollisionBehaviorDelegate>
+@interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (strong, nonatomic) NSArray *userPosts;
+@property (strong, nonatomic) NSArray<Post *> *userPosts;
+
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (weak, nonatomic) IBOutlet UILabel *numPostsLabel;
@@ -30,6 +31,8 @@
     self.profilePFImageView.image = nil;
     
     self.navigationItem.title = self.user.username;
+    
+    self.userPosts = [[NSArray alloc] init];
     
     // Make profile picture circular
     self.profilePFImageView.layer.cornerRadius = self.profilePFImageView.frame.size.width / 2;
@@ -52,6 +55,7 @@
 #pragma mark - Fetching Data
 
 - (void)fetchUserPosts {
+    NSLog(@"Trying to fetch posts");
     // Create query for 20 most recent tweets
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
@@ -60,7 +64,7 @@
     // Fetch data asynchronously
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable postsArray, NSError * _Nullable error) {
         if (postsArray) {
-            self.userPosts = [NSMutableArray arrayWithArray:postsArray];
+            self.userPosts = postsArray;
             self.numPostsLabel.text = [NSString stringWithFormat:@"%ld", self.userPosts.count];
             [self.collectionView reloadData];
             NSLog(@"User posts fetched");
@@ -72,6 +76,7 @@
 
 #pragma mark - Collection View
 - (void) setUpCollectionView {
+    
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
@@ -86,14 +91,13 @@
     CGFloat itemWidth = (self.collectionView.frame.size.width - layout.minimumInteritemSpacing * (postsPerLine - 1)) / postsPerLine;
     CGFloat itemHeight = itemWidth;
     layout.itemSize = CGSizeMake(itemWidth, itemHeight);
-    
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath { 
     PostCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"PostCollectionViewCell" forIndexPath:indexPath];
     
     // Load post image
-    Post *post = self.userPosts[indexPath.row];
+    Post *post = self.userPosts[indexPath.item];
     cell.postPFImageView.file = post.image;
     [cell.postPFImageView loadInBackground];
     

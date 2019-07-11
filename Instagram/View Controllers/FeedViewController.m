@@ -12,6 +12,7 @@
 #import "FeedViewController.h"
 #import "LoginViewController.h"
 #import "ComposeViewController.h"
+#import "ProfileViewController.h"
 #import "DetailsViewController.h"
 
 #import "Post.h"
@@ -39,6 +40,8 @@
     // Set up table view
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.posts = [[NSMutableArray alloc] init];
     [self fetchPosts];
     
     // Set up refresh control
@@ -109,7 +112,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-#pragma mark - Feed View Delegate
+#pragma mark - Post Composed Delegate
 
 - (void)didComposePost:(nonnull Post *)post {
     [self.posts insertObject:post atIndex:0];
@@ -126,13 +129,32 @@
         ComposeViewController *composeVC = [segue destinationViewController];
         composeVC.delegate = self;
     } else {
+        /*
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         
         DetailsViewController *detailsVC = [segue destinationViewController];
         detailsVC.post = self.posts[indexPath.row];
+         */
+        
+        NSLog(@"Trying to segue to user");
+        UITableViewCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        
+        ProfileViewController *profileVC = [segue destinationViewController];
+        Post *post = self.posts[indexPath.row];
+        profileVC.user = post.author;
+        
     }
 }
+
+/*
+UITableViewCell *tappedCell = sender;
+NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+
+DetailsViewController *detailsVC = [segue destinationViewController];
+detailsVC.post = self.posts[indexPath.row];
+ */
 
 
 
