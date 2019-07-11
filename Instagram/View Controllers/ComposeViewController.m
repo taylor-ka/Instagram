@@ -47,7 +47,6 @@
 
 - (void)setUpPhotoWithTapRecognizer {
     // Image and tap prompt
-    self.imageView.backgroundColor = [UIColor lightGrayColor];
     self.tapPromptLabel.hidden = NO;
     
     // Link tap gesture recognizer with image view
@@ -77,6 +76,7 @@
 
 // Close button tapped
 - (IBAction)onCloseTap:(id)sender {
+    [self.delegate didTapClose];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -91,7 +91,7 @@
             NSLog(@"Error posting: %@", error.localizedDescription);
         } else {
             NSLog(@"Successfully posted!");
-            [self.delegate fetchPosts];
+            [self.delegate didComposePost];
             [self.view endEditing:YES];
             [self dismissViewControllerAnimated:YES completion:nil];
         }

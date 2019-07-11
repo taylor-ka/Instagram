@@ -114,9 +114,8 @@
 
 #pragma mark - Post Composed Delegate
 
-- (void)didComposePost:(nonnull Post *)post {
-    [self.posts insertObject:post atIndex:0];
-    [self.tableView reloadData];
+- (void)didComposePost {
+    [self fetchPosts];
 }
 
 
@@ -144,7 +143,7 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         
         UINavigationController *navigationController = [segue destinationViewController];
-        ProfileViewController *profileVC = [navigationController topViewController];
+        ProfileViewController *profileVC = (ProfileViewController*)[navigationController topViewController];
         Post *post = self.posts[indexPath.row];
         profileVC.user = post.author;
         profileVC.title = post.author.username;

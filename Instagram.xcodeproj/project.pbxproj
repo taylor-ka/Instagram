@@ -28,6 +28,7 @@
 		B69835FD22D6A9DE0095E86E /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B69835FC22D6A9DE0095E86E /* DetailsViewController.m */; };
 		B698360022D6B1480095E86E /* PostCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B69835FF22D6B1480095E86E /* PostCollectionViewCell.m */; };
 		B6D5B21C22D7B742000CDB45 /* ImagePickerManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D5B21B22D7B742000CDB45 /* ImagePickerManagerViewController.m */; };
+		B6D5B21F22D7C646000CDB45 /* PostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B6D5B21E22D7C646000CDB45 /* PostViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,8 @@
 		B69835FF22D6B1480095E86E /* PostCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCollectionViewCell.m; sourceTree = "<group>"; };
 		B6D5B21A22D7B742000CDB45 /* ImagePickerManagerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImagePickerManagerViewController.h; sourceTree = "<group>"; };
 		B6D5B21B22D7B742000CDB45 /* ImagePickerManagerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImagePickerManagerViewController.m; sourceTree = "<group>"; };
+		B6D5B21D22D7C646000CDB45 /* PostViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostViewController.h; sourceTree = "<group>"; };
+		B6D5B21E22D7C646000CDB45 /* PostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostViewController.m; sourceTree = "<group>"; };
 		BFCDA1907F1BB52CF7C00E20 /* Pods_InstagramUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstagramUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE92474175538546AD37E3EE /* Pods-InstagramUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramUITests.release.xcconfig"; path = "Target Support Files/Pods-InstagramUITests/Pods-InstagramUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F07B797FE9B5D338FD4AA09D /* Pods-InstagramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-InstagramTests.debug.xcconfig"; path = "Target Support Files/Pods-InstagramTests/Pods-InstagramTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -209,6 +212,8 @@
 				B69835F622D690E00095E86E /* CurrentUserProfileViewController.m */,
 				B6D5B21A22D7B742000CDB45 /* ImagePickerManagerViewController.h */,
 				B6D5B21B22D7B742000CDB45 /* ImagePickerManagerViewController.m */,
+				B6D5B21D22D7C646000CDB45 /* PostViewController.h */,
+				B6D5B21E22D7C646000CDB45 /* PostViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -466,6 +471,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B6D5B21F22D7C646000CDB45 /* PostViewController.m in Sources */,
 				B69835D922D4061C0095E86E /* CreateAccountViewController.m in Sources */,
 				B69835EE22D66E450095E86E /* ProfileViewController.m in Sources */,
 				B69835FD22D6A9DE0095E86E /* DetailsViewController.m in Sources */,

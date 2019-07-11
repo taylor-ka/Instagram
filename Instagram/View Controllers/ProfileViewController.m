@@ -56,6 +56,11 @@
     [self fetchUserPosts];
 }
 
+- (IBAction)onCloseTap:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 #pragma mark - Fetching Data
 
 - (void)fetchUserPosts {
@@ -89,8 +94,8 @@
     // Two movies per row with border in between
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *) self.collectionView.collectionViewLayout;
     
-    layout.minimumInteritemSpacing = 5;
-    layout.minimumLineSpacing = 5;
+    layout.minimumInteritemSpacing = 2;
+    layout.minimumLineSpacing = 2;
     
     CGFloat postsPerLine = 3;
     CGFloat itemWidth = (self.collectionView.frame.size.width - layout.minimumInteritemSpacing * (postsPerLine - 1)) / postsPerLine;
