@@ -50,6 +50,11 @@
     [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    NSLog(@"view did appear");
+    [self fetchPosts];
+}
+
 - (void)fetchPosts {
     // Create query for 20 most recent tweets
     PFQuery *postQuery = [Post query];
@@ -111,13 +116,6 @@
     // Row will only be selected when user clicks
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
-
-#pragma mark - Post Composed Delegate
-
-- (void)didComposePost {
-    [self fetchPosts];
-}
-
 
 #pragma mark - Navigation
 
