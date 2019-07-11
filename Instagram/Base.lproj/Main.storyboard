@@ -157,7 +157,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="color" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </activityIndicatorView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bM3-Jz-f4A">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bM3-Jz-f4A">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -195,9 +195,6 @@
                                                         <constraint firstAttribute="height" constant="57" id="sPn-Cy-fes"/>
                                                         <constraint firstItem="8jf-2e-6SV" firstAttribute="leading" secondItem="tPl-HA-7qW" secondAttribute="trailing" constant="15" id="ukJ-DL-Boh"/>
                                                     </constraints>
-                                                    <connections>
-                                                        <outletCollection property="gestureRecognizers" destination="me3-UL-02m" appends="YES" id="K0N-Mp-xay"/>
-                                                    </connections>
                                                 </view>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FzQ-pA-Jur" customClass="PFImageView">
                                                     <rect key="frame" x="0.0" y="57" width="375" height="375"/>
@@ -267,6 +264,7 @@
                                             <outlet property="profilePFImageView" destination="tPl-HA-7qW" id="nQI-0M-Ae0"/>
                                             <outlet property="timeStampLabel" destination="62M-h2-X6C" id="YcA-Kr-0W4"/>
                                             <outlet property="usernameLabel" destination="8jf-2e-6SV" id="3Lw-0X-Qj0"/>
+                                            <segue destination="TB9-ax-nKg" kind="presentation" id="VH5-G2-mXc"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -294,11 +292,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e8W-ee-RQf" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="me3-UL-02m">
-                    <connections>
-                        <segue destination="TB9-ax-nKg" kind="presentation" id="nHO-G3-c22"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3336.8000000000002" y="-30.295566502463057"/>
         </scene>
