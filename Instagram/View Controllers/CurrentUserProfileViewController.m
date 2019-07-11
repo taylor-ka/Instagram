@@ -7,11 +7,12 @@
 //
 
 #import "CurrentUserProfileViewController.h"
+#import "ImagePickerManagerViewController.h"
 
-@interface CurrentUserProfileViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface CurrentUserProfileViewController () <ImagePickerManagerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIButton *editProfilePicButton;
-@property (strong, nonatomic) UIImagePickerController *imagePickerVC;
+@property (strong, nonatomic) ImagePickerManagerViewController *imagePickerManager;
 
 @end
 
@@ -20,85 +21,24 @@
 - (void)viewDidLoad {
     self.user = [PFUser currentUser];
     [super viewDidLoad];
-    [self setUpImagePicker];
+    
+    // Set up image picker
+    self.imagePickerManager = [[ImagePickerManagerViewController alloc] initWithSetUp];
+    [self addChildViewController:self.imagePickerManager];
+    self.imagePickerManager.delegate = self;
 }
 
-#pragma mark - Image Picker
-//TODO: REDUCE REDUNDANCY
-- (void)setUpImagePicker {
-    // Set up image picker
-    self.imagePickerVC = [UIImagePickerController new];
-    self.imagePickerVC.delegate = self;
-    self.imagePickerVC.allowsEditing = YES;
-    
-    // Check if camera is available
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    } else {
-        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-}
+#pragma mark - Image picking
 
 - (IBAction)onEditProfilePicTap:(id)sender {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera] && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        // Both image source types are available
-        [self pickImageWithSourceSelection];
-    } else if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]){
-        // Only camera is available
-        [self pickImageWithCamera];
-    } else {
-        // Only photo library is available
-        [self pickImageWithPhotoLibrary];
-    }
-    
+    [self.imagePickerManager showImagePicker];
 }
 
-- (void) pickImageWithCamera {
-    self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:self.imagePickerVC animated:YES completion:nil];
-}
-
-- (void) pickImageWithPhotoLibrary {
-    self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    [self presentViewController:self.imagePickerVC animated:YES completion:nil];
-}
-
-- (void) pickImageWithSourceSelection {
-    // Create alert controller with actions
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle: nil
-                                                                              message: nil
-                                                                       preferredStyle: UIAlertControllerStyleActionSheet];
-    // Take photo
-    [alertController addAction: [UIAlertAction actionWithTitle: @"Take Photo" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self pickImageWithCamera];
-    }]];
-    
-    // Choose existing photo
-    [alertController addAction: [UIAlertAction actionWithTitle: @"Choose Existing Photo" style: UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        [self pickImageWithPhotoLibrary];
-    }]];
-    
-    // Cancel
-    [alertController addAction: [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }]];
-    
-    // Present as modal popover
-    alertController.modalPresentationStyle = UIModalPresentationPopover;
-    [self presentViewController: alertController animated: YES completion: nil];
-}
-
-// After user takes photo/ picks profile image
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    // Get the image captured by the UIImagePickerController
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    
+- (void)didPickImage:(nonnull UIImage *)image {
     // Update chosen profile picture
-    self.profilePFImageView.image = editedImage;
-    [self updateUserProfilePicture:editedImage];
-    
-    // Dismiss UIImagePickerController
-    [self dismissViewControllerAnimated:NO completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    self.profilePFImageView.image = image;
+    [self updateUserProfilePicture:image];
 }
 
 #pragma mark - Update user settings
@@ -126,6 +66,8 @@
     // return object with image
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
+
+
 
 /*
 #pragma mark - Navigation

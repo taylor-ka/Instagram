@@ -540,7 +540,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Edit Profile Picture"/>
                                 <connections>
-                                    <action selector="onEditProfilePicTap:" destination="6Sc-Gp-VqL" eventType="touchUpInside" id="f1f-lO-jnW"/>
+                                    <action selector="onEditProfilePicTap:" destination="6Sc-Gp-VqL" eventType="touchUpInside" id="t5O-Ws-Duy"/>
                                 </connections>
                             </button>
                         </subviews>
