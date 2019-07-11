@@ -10,6 +10,7 @@
 #import <Parse/PFImageView.h>
 #import "Post.h"
 #import "PostCollectionViewCell.h"
+#import "DetailsViewController.h"
 
 @interface ProfileViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -58,6 +59,7 @@
     NSLog(@"Trying to fetch posts");
     // Create query for 20 most recent tweets
     PFQuery *postQuery = [Post query];
+    [postQuery includeKey:@"author"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery whereKey:@"author" equalTo:self.user];
 
@@ -108,14 +110,17 @@
     return self.userPosts.count;
 }
 
-/*
+
  #pragma mark - Navigation
  
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
+     UICollectionViewCell *tappedCell = sender;
+     NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
+     
+     DetailsViewController *detailsVC = [segue destinationViewController];
+     detailsVC.post = self.userPosts[indexPath.item];
  }
- */
+
 
 @end

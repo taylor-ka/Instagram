@@ -129,31 +129,23 @@
         ComposeViewController *composeVC = [segue destinationViewController];
         composeVC.delegate = self;
     } else {
-        /*
         UITableViewCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         
         DetailsViewController *detailsVC = [segue destinationViewController];
         detailsVC.post = self.posts[indexPath.row];
-         */
-        
-        NSLog(@"Trying to segue to user");
-        UITableViewCell *tappedCell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        
-        ProfileViewController *profileVC = [segue destinationViewController];
-        Post *post = self.posts[indexPath.row];
-        profileVC.user = post.author;
-        
     }
 }
 
 /*
-UITableViewCell *tappedCell = sender;
-NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-
-DetailsViewController *detailsVC = [segue destinationViewController];
-detailsVC.post = self.posts[indexPath.row];
+ NSLog(@"Trying to segue to user");
+ UITableViewCell *tappedCell = sender;
+ NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+ 
+ ProfileViewController *profileVC = [segue destinationViewController];
+ Post *post = self.posts[indexPath.row];
+ profileVC.user = post.author;
+ 
  */
 
 
