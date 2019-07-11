@@ -8,14 +8,16 @@
 
 #import "ComposeViewController.h"
 #import "Post.h"
+#import "ImagePickerManagerViewController.h"
 
-@interface ComposeViewController ()
+@interface ComposeViewController () <ImagePickerManagerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (weak, nonatomic) IBOutlet UILabel *tapPromptLabel;
-
-@property (strong, nonatomic)  UIImagePickerController *imagePickerVC;
 @property (weak, nonatomic) IBOutlet UITextView *captionTextView;
+
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (strong, nonatomic) ImagePickerManagerViewController *imagePickerManager;
 
 @end
 
@@ -27,17 +29,21 @@
     // Super class sets up tap gesture recognizer, image picker
     [super viewDidLoad];
     
-    // Set up text view
+    [self setUpTextView];
+    [self setUpPhotoWithTapRecognizer];
+    
+    // Set up image picker
+    self.imagePickerManager = [[ImagePickerManagerViewController alloc] initWithSetUp];
+    [self addChildViewController:self.imagePickerManager];
+    self.imagePickerManager.delegate = self;
+}
+
+- (void)setUpTextView {
     self.captionTextView.layer.borderWidth = 1;
     self.captionTextView.layer.borderColor = [[UIColor grayColor] CGColor];
     self.captionTextView.layer.cornerRadius = 5;
     self.captionTextView.text = nil;
-    
-    [self setUpPhotoWithTapRecognizer];
-    [self setUpImagePicker];
 }
-
-#pragma mark - Photo Tap
 
 - (void)setUpPhotoWithTapRecognizer {
     // Image and tap prompt
@@ -48,40 +54,17 @@
     UITapGestureRecognizer *photoTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(onPhotoTap:)];
     [self.imageView addGestureRecognizer:photoTapGestureRecognizer];
     [self.imageView setUserInteractionEnabled:YES];
-    
 }
+
+#pragma mark - Picking an image
 
 - (void)onPhotoTap:(id)sender {
-    [self presentViewController:self.imagePickerVC animated:YES completion:nil];
-    NSLog(@"Presented ComposeVC");
+    [self.imagePickerManager showImagePicker];
 }
 
-#pragma mark - Image Picker controller
-
-- (void)setUpImagePicker {
-    // Set up image picker
-    self.imagePickerVC = [UIImagePickerController new];
-    self.imagePickerVC.delegate = self;
-    self.imagePickerVC.allowsEditing = YES;
-    
-    // Check if camera is available
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
-    } else {
-        self.imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    }
-}
-
-// After user takes photo/ picks image
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-    // Get the image captured by the UIImagePickerController
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    
-    self.imageView.image = editedImage;
+- (void)didPickImage:(UIImage *)image {
+    self.imageView.image = image;
     self.tapPromptLabel.hidden = YES;
-    
-    // Dismiss UIImagePickerController
-    [self dismissViewControllerAnimated:NO completion:nil];
 }
 
 #pragma mark - User actions
@@ -98,6 +81,7 @@
 }
 
 // Share button tapped
+// TODO: error if blank
 - (IBAction)onShareTap:(id)sender {
     // Loading indicator
     [self.activityIndicator startAnimating];

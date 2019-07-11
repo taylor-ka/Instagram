@@ -81,9 +81,7 @@
     }]];
     
     // Cancel
-    [alertController addAction: [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        [self.parentViewController dismissViewControllerAnimated:YES completion:nil];
-    }]];
+    [alertController addAction: [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
     
     // Present as modal popover
     alertController.modalPresentationStyle = UIModalPresentationPopover;

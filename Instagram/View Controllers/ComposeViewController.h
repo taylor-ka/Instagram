@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface ComposeViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ComposeViewController : UIViewController
 
 @property (weak, nonatomic) id<PostComposedDelegate> delegate;
 

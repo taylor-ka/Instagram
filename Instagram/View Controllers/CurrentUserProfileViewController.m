@@ -8,6 +8,7 @@
 
 #import "CurrentUserProfileViewController.h"
 #import "ImagePickerManagerViewController.h"
+#import "Post.h"
 
 @interface CurrentUserProfileViewController () <ImagePickerManagerDelegate>
 
@@ -17,6 +18,8 @@
 @end
 
 @implementation CurrentUserProfileViewController
+
+#pragma mark - Loading
 
 - (void)viewDidLoad {
     self.user = [PFUser currentUser];
@@ -28,7 +31,7 @@
     self.imagePickerManager.delegate = self;
 }
 
-#pragma mark - Image picking
+#pragma mark - Image Picking
 
 - (IBAction)onEditProfilePicTap:(id)sender {
     [self.imagePickerManager showImagePicker];
@@ -44,30 +47,10 @@
 #pragma mark - Update user settings
 
 - (void)updateUserProfilePicture:(UIImage*)image {
-    PFFileObject *picFile = [CurrentUserProfileViewController getPFFileFromImage:image];
+    PFFileObject *picFile = [Post getPFFileFromImage:image];
     [self.user setObject: picFile forKey:@"profilePic"];
     [self.user saveInBackground];
 }
-
-//TODO: reduce redundancy here
-// create file object from image
-+ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
-    // check if image is not nil
-    if (!image) {
-        return nil;
-    }
-    
-    NSData *imageData = UIImagePNGRepresentation(image);
-    // get image data and check if that is not nil
-    if (!imageData) {
-        return nil;
-    }
-    
-    // return object with image
-    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
-}
-
-
 
 /*
 #pragma mark - Navigation
