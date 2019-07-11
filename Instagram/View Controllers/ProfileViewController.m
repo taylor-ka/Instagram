@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSArray *userPosts;
 @property (weak, nonatomic) IBOutlet UINavigationItem *navigationItem;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UILabel *numPostsLabel;
 
 @end
 
@@ -42,7 +43,6 @@
     }
     
     [self setUpCollectionView];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -61,6 +61,7 @@
     [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Post *> * _Nullable postsArray, NSError * _Nullable error) {
         if (postsArray) {
             self.userPosts = [NSMutableArray arrayWithArray:postsArray];
+            self.numPostsLabel.text = [NSString stringWithFormat:@"%ld", self.userPosts.count];
             [self.collectionView reloadData];
             NSLog(@"User posts fetched");
         } else {
@@ -90,17 +91,12 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath { 
     PostCollectionViewCell *cell = [self.collectionView dequeueReusableCellWithReuseIdentifier:@"PostCollectionViewCell" forIndexPath:indexPath];
-    cell.postPFImageView.alpha = 0.0;
     
     // Load post image
     Post *post = self.userPosts[indexPath.row];
     cell.postPFImageView.file = post.image;
     [cell.postPFImageView loadInBackground];
     
-    // Fade in
-    [UIView animateWithDuration:0.5 animations:^{
-        cell.postPFImageView.alpha = 1.0;
-    }];
     return cell;
 }
 

@@ -206,7 +206,6 @@
                                             <outlet property="profilePFImageView" destination="tPl-HA-7qW" id="Te2-dG-djr"/>
                                             <outlet property="timeStampLabel" destination="62M-h2-X6C" id="BK5-6L-tm7"/>
                                             <outlet property="usernameLabel" destination="8jf-2e-6SV" id="W6c-pQ-NSO"/>
-                                            <segue destination="29O-XT-4nR" kind="show" id="3Uq-EC-F2R"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -308,7 +307,22 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="4265" y="-652"/>
+            <point key="canvasLocation" x="4068" y="-901"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2vD-BC-su0">
+            <objects>
+                <viewController id="M1X-nr-WeG" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ckG-Cf-gIt">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="d6Z-HT-pRH"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fRL-Wa-4Bd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4348" y="-30"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="RAS-Qp-wgQ">
@@ -365,7 +379,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lFE-17-rvx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4264.8000000000002" y="17.733990147783253"/>
+            <point key="canvasLocation" x="4433" y="664"/>
         </scene>
         <!--Authenticated Navigation Controller-->
         <scene sceneID="fo4-ts-53Q">
@@ -414,17 +428,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultProfilePic" translatesAutoresizingMaskIntoConstraints="NO" id="0Cv-rE-XxV" customClass="PFImageView">
-                                <rect key="frame" x="16" y="106" width="114" height="114"/>
+                                <rect key="frame" x="101" y="106" width="114" height="114"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Agl-Bm-ErQ">
-                                <rect key="frame" x="124" y="228" width="127" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Edit Profile Picture"/>
-                                <connections>
-                                    <action selector="onEditProfilePicTap:" destination="6Sc-Gp-VqL" eventType="touchUpInside" id="f1f-lO-jnW"/>
-                                </connections>
-                            </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HXA-9J-0CZ">
                                 <rect key="frame" x="0.0" y="274" width="375" height="455"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -460,6 +466,28 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8eE-EZ-Qjh">
+                                <rect key="frame" x="245" y="137" width="14" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Posts" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mzk-R2-Jpy">
+                                <rect key="frame" x="231" y="165" width="43" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Agl-Bm-ErQ">
+                                <rect key="frame" x="124" y="231" width="127" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Edit Profile Picture"/>
+                                <connections>
+                                    <action selector="onEditProfilePicTap:" destination="6Sc-Gp-VqL" eventType="touchUpInside" id="f1f-lO-jnW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="5hB-6h-hOf"/>
@@ -469,6 +497,7 @@
                         <outlet property="collectionView" destination="HXA-9J-0CZ" id="5t3-3y-Z1M"/>
                         <outlet property="editProfilePicButton" destination="Agl-Bm-ErQ" id="RLh-Nd-y9M"/>
                         <outlet property="navigationItem" destination="MdO-lY-FEx" id="TYw-YR-RfP"/>
+                        <outlet property="numPostsLabel" destination="8eE-EZ-Qjh" id="Hhi-Hd-mn4"/>
                         <outlet property="profilePFImageView" destination="0Cv-rE-XxV" id="eMU-sK-Xf2"/>
                     </connections>
                 </viewController>
