@@ -18,7 +18,7 @@
 #import "Post.h"
 #import "PostCell.h"
 
-@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource, PostComposedDelegate>
+@interface FeedViewController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSMutableArray *posts;
@@ -123,11 +123,6 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"composeSegue"]){
-        NSLog(@"compose segue prep");
-        ComposeViewController *composeVC = [segue destinationViewController];
-        composeVC.delegate = self;
-    } else {
         /*
         // Segue to details view of post
         UITableViewCell *tappedCell = sender;
@@ -147,8 +142,6 @@
         Post *post = self.posts[indexPath.row];
         profileVC.user = post.author;
         profileVC.title = post.author.username;
-
-    }
 }
 
 

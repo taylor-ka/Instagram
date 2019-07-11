@@ -10,6 +10,7 @@
 #import <Parse/PFCollectionViewCell.h>
 #import <Parse/PFImageView.h>
 #import "NSDate+DateTools.h"
+#import "ProfileViewController.h"
 
 @interface PostCell ()
 
@@ -22,6 +23,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *postCaptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeStampLabel;
 
+// Likes
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UILabel *likeLabel;
 
 @end
 
@@ -63,7 +67,7 @@
     }];
 }
 
-- (void) setUpProfilePicture {
+- (void)setUpProfilePicture {
     // Make profile picture circular
     self.profilePFImageView.layer.cornerRadius = self.profilePFImageView.frame.size.width / 2;
     self.profilePFImageView.clipsToBounds = true;
@@ -71,6 +75,11 @@
     // Set up profile picture
     self.profilePFImageView.file = self.post.author[@"profilePic"];
     [self.profilePFImageView loadInBackground];
+}
+
+- (IBAction)onLikeTap:(id)sender {
+    [self.likeButton setImage:[UIImage imageNamed:@"heartRed"] forState:UIControlStateNormal];
+    self.likeLabel.text = @"1 like";
 }
 
 @end
