@@ -24,6 +24,7 @@
     // Do any additional setup after loading the view.
 }
 
+// TODO: KNOWN BUG: afteraccount creation, trying to change profile picture immediately pulls up sign in screen again
 - (IBAction)onSignUpTap:(id)sender {
     // TODO: verify passwords are the same
     

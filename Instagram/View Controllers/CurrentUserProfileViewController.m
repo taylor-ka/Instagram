@@ -39,7 +39,6 @@
 
 - (void)didPickImage:(nonnull UIImage *)image {
     // Update chosen profile picture
-    [self dismissViewControllerAnimated:YES completion:nil];
     self.profilePFImageView.image = image;
     [self updateUserProfilePicture:image];
 }

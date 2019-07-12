@@ -81,8 +81,10 @@
 - (IBAction)onLogoutTap:(id)sender {
     // Log out user
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        // TODO: code in case of error
-        NSLog(@"Error logging out: %@", error.localizedDescription);
+        //TODO: code in case of error
+        if (error) {
+            NSLog(@"Error logging out: %@", error.localizedDescription);
+        }
     }];
     
     // Return to login screen
