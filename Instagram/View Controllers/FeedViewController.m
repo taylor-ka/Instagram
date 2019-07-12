@@ -34,7 +34,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Set up activity indicato
+    // Set up activity indicator
     [self.activityIndicator startAnimating];
     
     // Set up table view
