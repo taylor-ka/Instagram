@@ -19,6 +19,8 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (strong, nonatomic) ImagePickerManagerViewController *imagePickerManager;
 
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
+
 @end
 
 @implementation ComposeViewController
@@ -83,12 +85,17 @@
 // Share button tapped
 // TODO: error if blank
 - (IBAction)onShareTap:(id)sender {
+    // prevent double taps
+    self.shareButton.userInteractionEnabled = NO;
+    
     // Loading indicator
     [self.activityIndicator startAnimating];
     
+    // Post image
     [Post postUserImage:self.imageView.image withCaption:self.captionTextView.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if (error) {
             NSLog(@"Error posting: %@", error.localizedDescription);
+            
         } else {
             NSLog(@"Successfully posted!");
             [self.delegate didComposePost];
@@ -96,6 +103,8 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         [self.activityIndicator stopAnimating];
+        self.shareButton.userInteractionEnabled = YES;
+
     }];
 }
 

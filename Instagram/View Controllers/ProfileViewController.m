@@ -68,6 +68,7 @@
     // Create query for 20 most recent tweets
     PFQuery *postQuery = [Post query];
     [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"likeCount"];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery whereKey:@"author" equalTo: self.user];
 

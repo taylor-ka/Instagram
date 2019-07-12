@@ -42,7 +42,6 @@
     self.tableView.dataSource = self;
     
     self.posts = [[NSMutableArray alloc] init];
-    [self fetchPosts];
     
     // Set up refresh control
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -60,6 +59,7 @@
     PFQuery *postQuery = [Post query];
     [postQuery orderByDescending:@"createdAt"];
     [postQuery includeKey:@"author"];
+    [postQuery includeKey:@"likeCount"];
     postQuery.limit = 20;
     
     // Fetch data asynchronously

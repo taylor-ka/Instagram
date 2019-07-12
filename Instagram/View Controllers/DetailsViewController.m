@@ -17,8 +17,13 @@
 @property (weak, nonatomic) IBOutlet PFImageView *profilePFImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *postPFImageView;
+
 @property (weak, nonatomic) IBOutlet UILabel *postCaptionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *timeStampLabel;
+
+// Liking
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UILabel *likeLabel;
 
 @end
 
@@ -37,6 +42,7 @@
     [self.postPFImageView loadInBackground];
     
     [self setUpProfilePicture];
+    [self setUpLikeStatus];
 }
 
 - (void) setUpProfilePicture {
@@ -48,6 +54,33 @@
     self.profilePFImageView.file = self.post.author[@"profilePic"];
     [self.profilePFImageView loadInBackground];
 }
+
+- (void)setUpLikeStatus {
+    if ([self.post.likeCount isEqualToNumber:@(0)]) {
+        [self.likeButton setImage:[UIImage imageNamed:@"heartOutline"] forState:UIControlStateNormal];
+        self.likeLabel.text = @"0 likes";
+    } else {
+        [self.likeButton setImage:[UIImage imageNamed:@"heartRed"] forState:UIControlStateNormal];
+        self.likeLabel.text = @"1 like";
+    }
+}
+
+- (IBAction)onLikeTap:(id)sender {
+    if ([self.post.likeCount isEqualToNumber:@(0)]) {
+        // Like post
+        [self.likeButton setImage:[UIImage imageNamed:@"heartRed"] forState:UIControlStateNormal];
+        self.likeLabel.text = @"1 like";
+        self.post.likeCount = @(1);
+        [self.post saveInBackground];
+    } else {
+        // Unlike post
+        [self.likeButton setImage:[UIImage imageNamed:@"heartOutline"] forState:UIControlStateNormal];
+        self.likeLabel.text = @"0 likes";
+        self.post.likeCount = @(0);
+        [self.post saveInBackground];
+    }
+}
+
 
 /*
 #pragma mark - Navigation
