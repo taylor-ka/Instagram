@@ -1,0 +1,22 @@
+{
+  "name": "instagram",
+  "version": "1.0.0",
+  "description": "**Instagram** is a photo sharing app using Parse as its backend.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/taylor-ka/Instagram.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taylor-ka/Instagram/issues"
+  },
+  "homepage": "https://github.com/taylor-ka/Instagram#readme",
+  "engines": {
+    "node": "10.x"
+  }
+}
